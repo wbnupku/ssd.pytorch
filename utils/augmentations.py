@@ -1,3 +1,16 @@
+# -*- coding: utf-8 -*-
+###############################################################################
+#
+# Copyright (c) 2016 Baidu.com, Inc. All Rights Reserved
+#
+###############################################################################
+"""
+ This module provides.
+
+Authors: wangxiao05(wangxiao05@baidu.com)
+Date:    
+"""
+
 import torch
 from torchvision import transforms
 import cv2
@@ -18,7 +31,6 @@ def jaccard_numpy(box_a, box_b):
     is simply the intersection over union of two boxes.
     E.g.:
         A ∩ B / A ∪ B = A ∩ B / (area(A) + area(B) - A ∩ B)
-    Args:
         box_a: Multiple bounding boxes, Shape: [num_boxes,4]
         box_b: Single bounding box, Shape: [4]
     Return:

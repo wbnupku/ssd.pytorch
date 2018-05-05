@@ -61,11 +61,11 @@ class VOCAnnotationTransform(object):
                 continue
             name = obj.find('name').text.lower().strip()
             bbox = obj.find('bndbox')
-
             pts = ['xmin', 'ymin', 'xmax', 'ymax']
             bndbox = []
             for i, pt in enumerate(pts):
-                cur_pt = int(bbox.find(pt).text) - 1
+                # cur_pt int to float
+                cur_pt = float(bbox.find(pt).text) - 1
                 # scale height or width
                 cur_pt = cur_pt / width if i % 2 == 0 else cur_pt / height
                 bndbox.append(cur_pt)
@@ -73,7 +73,6 @@ class VOCAnnotationTransform(object):
             bndbox.append(label_idx)
             res += [bndbox]  # [xmin, ymin, xmax, ymax, label_ind]
             # img_id = target.find('filename').text[:-4]
-
         return res  # [[xmin, ymin, xmax, ymax, label_ind], ... ]
 
 
@@ -113,7 +112,6 @@ class VOCDetection(data.Dataset):
 
     def __getitem__(self, index):
         im, gt, h, w = self.pull_item(index)
-
         return im, gt
 
     def __len__(self):
